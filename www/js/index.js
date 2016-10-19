@@ -39,9 +39,9 @@ var app = {
     onDeviceReady: function() {
 		var db = window.sqlitePlugin.openDatabase({name: "sa.db", createFromLocation: 1});
 		db.executeSql('select count(*) as rowscount from ta', [], function(res){
-		console.log('record count ' + res.rows.item(0).rowscount);
+		alert("record count " + res.rows.item(0).rowscount);
 		}, function(error) {
-    console.log('SELECT SQL statement ERROR: ' + error.message);		
+    alert("SELECT SQL statement ERROR: " + error.message);		
 		} );
         app.receivedEvent('deviceready');
     },
