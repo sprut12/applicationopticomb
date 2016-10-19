@@ -89,8 +89,26 @@ var app = {
     },
 	
 	gotopage: function() {
-		alert("b");
-	},
+		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+		scanner.scan( 
+			function (result) {
+				var sqlstr = "select * from ta where c=" + result.text; 
+				db.executeSql(sqlstr, [], 
+					function(res){
+						alert("product " + res.rows.item(0).b);
+						var stgo = "http://www.opti-com.ru/catalog/online/categories/product-" + res.rows.item(0).b + "/";	
+						window.open(stgo, '_blank', 'location=yes');	
+					}, 
+					function(error) {
+    						alert("SELECT SQL statement ERROR: " + error.message);		
+					} 
+					);
+			}, 
+			function (error) { 
+           			console.log("Scanning failed: ", error); 
+        		} 
+		);	
+		},
 
     encode: function() {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
