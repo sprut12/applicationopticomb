@@ -95,7 +95,7 @@ var app = {
 			function (result) {
 				var sqlstr = "select * from ta where c=" + result.text;
 				alert(sqlstr);
-				alert(db);
+				var db = window.sqlitePlugin.openDatabase({name: "sa.db", createFromLocation: 1});
 				db.executeSql(sqlstr, [], 
 					function(res){
 						alert("product " + res.rows.item(0).b);
