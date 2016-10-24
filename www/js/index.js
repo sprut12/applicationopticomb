@@ -18,7 +18,8 @@
  */
 var app = {
     // Application Constructor
-    var db;
+	
+	var db,
 	
     initialize: function() {
         this.bindEvents();
@@ -67,10 +68,10 @@ var app = {
 
         scanner.scan( function (result) { 
 
-            alert("We got a barcode\n" + 
-            "Result: " + result.text + "\n" + 
-            "Format: " + result.format + "\n" + 
-            "Cancelled: " + result.cancelled);  
+            alert("Получен штрихкод\n" + 
+            "Результат: " + result.text + "\n" + 
+            "Формат: " + result.format + "\n" + 
+            "Отмена: " + result.cancelled);  
 
             /* console.log("Scanner result: \n" +
                 "text: " + result.text + "\n" +
