@@ -18,9 +18,7 @@
  */
 var app = {
     // Application Constructor
-	
-	var db,
-	
+		
     initialize: function() {
         this.bindEvents();
     },
@@ -40,7 +38,7 @@ var app = {
     // The scope of `this` is the event. In order to call the `receivedEvent`
     // function, we must explicity call `app.receivedEvent(...);`
     onDeviceReady: function() {
-		db = window.sqlitePlugin.openDatabase({name: "sa.db", createFromLocation: 1});
+		var db = window.sqlitePlugin.openDatabase({name: "sa.db", createFromLocation: 1});
 		db.executeSql('select count(*) as rowscount from ta', [], function(res){
 		alert("record count " + res.rows.item(0).rowscount);
 		}, function(error) {
@@ -58,7 +56,7 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        alert('Received Event: ' + id);
     },
 
     scan: function() {
@@ -97,10 +95,12 @@ var app = {
 			function (result) {
 				var sqlstr = "select * from ta where c=" + result.text;
 				alert(sqlstr);
+				alert(db);
 				db.executeSql(sqlstr, [], 
 					function(res){
 						alert("product " + res.rows.item(0).b);
-						var stgo = "http://www.opti-com.ru/catalog/online/categories/product-" + res.rows.item(0).b + "/";	
+						var stgo = "http://www.opti-com.ru/catalog/online/categories/product-" + res.rows.item(0).b + "/";
+						alert(stgo);						
 						window.open(stgo, '_blank', 'location=yes');	
 					}, 
 					function(error) {
