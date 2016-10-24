@@ -18,6 +18,8 @@
  */
 var app = {
     // Application Constructor
+    var db;
+	
     initialize: function() {
         this.bindEvents();
     },
@@ -37,7 +39,7 @@ var app = {
     // The scope of `this` is the event. In order to call the `receivedEvent`
     // function, we must explicity call `app.receivedEvent(...);`
     onDeviceReady: function() {
-		var db = window.sqlitePlugin.openDatabase({name: "sa.db", createFromLocation: 1});
+		db = window.sqlitePlugin.openDatabase({name: "sa.db", createFromLocation: 1});
 		db.executeSql('select count(*) as rowscount from ta', [], function(res){
 		alert("record count " + res.rows.item(0).rowscount);
 		}, function(error) {
@@ -92,7 +94,8 @@ var app = {
 		var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 		scanner.scan( 
 			function (result) {
-				var sqlstr = "select * from ta where c=" + result.text; 
+				var sqlstr = "select * from ta where c=" + result.text;
+				alert(sqlstr);
 				db.executeSql(sqlstr, [], 
 					function(res){
 						alert("product " + res.rows.item(0).b);
